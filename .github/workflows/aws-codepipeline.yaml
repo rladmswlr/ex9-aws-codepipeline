@@ -41,15 +41,23 @@ jobs:
         run: |
           # docker build의 마지막 마침표( . )은 context경로를 의미합니다.
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
-                       -t $ECR_REGISTRY/$ECR_REPOSITORY:$latest \
+                       -t $ECR_REGISTRY/$ECR_REPOSITORY:latest \
                        -f ./nginx/Dockerfile ./nginx
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$latest
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
           
       # 4. (중요) Zip 압축 단계 전에 chmod +x 추가
-
+      - name: Grant execute permission for scripts
+        run: chmod +x scripts/*.sh
       # 5. CodeDeploy 배포 번들 생성 (appspec.yml과 scripts 디렉토리만 zip)
+      - name: Create CodeDeploy Bundle
+        run: |
+          mkdir -p build
+          zip -r build/bundle.zip appspec.yml scripts/
 
       # 6. 배포 번들 S3 업로드
-
+      - name: Upload bundle to S3
+        run: |
+          aws s3 cp build/bundle.zip s3://${{ env.S3_BUCKET_NAME }}/bundle-${{ github.sha }}.zip
+          
       # 7. CodeDeploy 배포 생성

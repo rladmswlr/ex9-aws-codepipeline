@@ -1,0 +1,129 @@
+<!DOCTYPEdoctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MSP 6기 CI/CD 실습 (Purple Ver.)</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        /* [변경] 배경색: 연한 보라색/핑크색 그라데이션 */
+        background: linear-gradient(
+          to top right,
+          #f3e5f5 0%, /* 연한 보라 */
+          #ffffff 50%,
+          #fce4ec 100%  /* 연한 핑크 */
+        );
+        background-attachment: fixed;
+      }
+
+      .container {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.98);
+        
+        /* [변경] 박스 모양: 정원(Circle)으로 변경 */
+        width: 300px;           /* 너비 고정 */
+        height: 300px;          /* 높이 고정 (너비와 동일하게) */
+        border-radius: 50%;     /* 완전한 원형 */
+        
+        /* 내부 컨텐츠 중앙 정렬을 위한 flex 설정 */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        /* 패딩 조정 (원형 안쪽에 맞게) */
+        padding: 2rem; 
+        box-sizing: border-radius;
+
+        /* [변경] 그림자: 보라색 톤으로 변경 */
+        box-shadow: 0 15px 35px rgba(106, 27, 154, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        cursor: pointer;
+      }
+
+      .container:hover {
+        transform: translateY(-8px);
+        /* [변경] 호버 그림자: 보라색 톤 */
+        box-shadow: 0 20px 40px rgba(106, 27, 154, 0.15);
+        animation: shake 0.4s ease-in-out 0s 2;
+      }
+
+      /* 이미지 스타일: 유지 (원형으로 깔끔하게 정렬) */
+      .profile-img {
+        width: 70px;  /* 원형 박스에 맞춰 크기 살짝 조정 */
+        height: 70px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1rem;
+        /* [변경] 테두리 색상: 연한 보라 */
+        border: 3px solid #f3e5f5;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      @keyframes shake {
+        0% { transform: translateY(-8px) rotate(0deg); }
+        25% { transform: translateY(-8px) rotate(0.3deg); }
+        50% { transform: translateY(-8px) rotate(0deg); }
+        75% { transform: translateY(-8px) rotate(-0.3deg); }
+        100% { transform: translateY(-8px) rotate(0deg); }
+      }
+
+      h1 {
+        /* [변경] 제목 색상: 진한 보라 */
+        color: #6a1b9a;
+        margin: 0 0 0.3rem 0;
+        font-size: 1.5rem; /* 원형 박스에 맞춰 크기 살짝 조정 */
+        letter-spacing: -1px;
+      }
+      p {
+        color: #555;
+        font-size: 0.9rem; /* 원형 박스에 맞춰 크기 살짝 조정 */
+        line-height: 1.4;
+        margin-top: 0;
+        margin-bottom: 1.2rem;
+      }
+      strong {
+        /* [변경] 포인트 색상: 밝은 보라 */
+        color: #9c27b0;
+      }
+
+      .status-badge {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        /* [변경] 뱃지 색상: 보라색 그라데이션 */
+        background: linear-gradient(45deg, #7b1fa2, #9c27b0);
+        color: white;
+        border-radius: 50px;
+        font-weight: bold;
+        font-size: 0.75rem;
+        /* [변경] 뱃지 그림자: 보라색 톤 */
+        box-shadow: 0 4px 10px rgba(123, 31, 162, 0.3);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img
+        src="/images/graduation-cap.png"
+        alt="Graduation Cap"
+        class="profile-img"
+      />
+
+      <h1>MSP 6기</h1>
+      <p><strong>GitHub Actions</strong>를 이용한<br />Nginx 자동 배포 성공!</p>
+      <div class="status-badge">CD Pipeline Active</div>
+    </div>
+  </body>
+</html>

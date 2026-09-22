@@ -61,3 +61,10 @@ jobs:
           aws s3 cp build/bundle.zip s3://${{ env.S3_BUCKET_NAME }}/bundle-${{ github.sha }}.zip
           
       # 7. CodeDeploy 배포 생성
+      # - name:
+      #   run: |
+      #     aws deploy create-deployment \
+      #       --application-name ${{ env.CODE_DEPLOY_APP_NAME }} \
+      #       --deployment-group-name ${{ env.CODE_DEPLOY_GROUP_NAME}} \
+      #       --s3-location bucket=${{ env.S3_BUCKET_NAME }},key=bundle-${{ github.sha }}.zip, bundleType=zip \
+      #       --region ${{ env.AWS_REGION }}

@@ -8,8 +8,9 @@ CONTAINER_NAME="nginx-app"
 ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
 ECR_URI="$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:latest"
 
-aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
-
+aws ecr get-login-password --region $AWS_REGION | \
+docker login --username AWS --password-stdin \
+$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
 # 이미지(Docker) Pull
 docker pull $ECR_URI
 
